@@ -3,11 +3,12 @@ import { updateImageCount } from '@/lib/api-stat-tracker';
 import { auth } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import Replicate from 'replicate';
 
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const replicate = new Replicate({
+  auth: process.env.REPLICATE_API_TOKEN || ""
+})
 
 export async function POST(req: Request) {
   try {
@@ -17,9 +18,6 @@ export async function POST(req: Request) {
 
     if (!userId) {
       return new NextResponse('Unauthorized', { status: 401 });
-    }
-    if (!openai.apiKey) {
-      return new NextResponse('OpenAI API Key not configured', { status: 500 });
     }
     if (!prompt) {
       return new NextResponse('Prompt are required', { status: 400 });
@@ -37,17 +35,22 @@ export async function POST(req: Request) {
       return new NextResponse('Resolution is required', { status: 400 });
     }
 
-    const response = await openai.images.generate({
-      prompt,
-      n: parseInt(amount, 10),
-      size: resolution,
-
-    });
+    const response = await replicate.run(
+      "stability-ai/stable-diffusion:ac732df83cea7fff18b8472768c88ad041fa750ff7682a21affe81863cbe77e4",
+      {
+        input: {
+          prompt: prompt,
+          num_outputs: amount,
+          // width: '512',
+          // height: '512'
+        }
+      }
+    );
 
     await increaseApiLimit();
     await updateImageCount();
 
-    return NextResponse.json(response.data);
+    return NextResponse.json(response);
   } catch (error) {
     console.log('[IMAGE_ERROR]', error);
     return new NextResponse('Internal error', { status: 500 });

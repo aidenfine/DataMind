@@ -9,15 +9,11 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import OpenAI from "openai";
 import axios from 'axios'
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
-import { cn } from "@/lib/utils";
-import { UserAvatar } from "@/components/user-avatar";
-import { BotAvatar } from "@/components/bot-avatar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Image from "next/image";
 
@@ -43,9 +39,12 @@ const ImagePage = () => {
 
             const response = await axios.post("/api/image", values);
 
-            const urls = response.data.map((image: {url: string}) => image.url);
+            const urls = response.data
+            //response.data.map((image: {url: string}) => image.url);
+            console.log(urls, 'urls')
 
             setImages(urls);
+            console.log(images, 'images')
             form.reset();
             
         } catch (error: any) {
