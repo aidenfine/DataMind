@@ -18,7 +18,7 @@ const Sidebar = () => {
                         src="/logo.png"
                         />
                     </div>
-                    <h1 className='text-2xl font-bold text-[#030229]'>NAME</h1>
+                    <h1 className='text-2xl font-bold text-[#030229]'>DataMind</h1>
                 </Link>
                 <div className='space-y-2.5'>
                     {routes.map((route) => (

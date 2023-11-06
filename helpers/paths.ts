@@ -1,4 +1,4 @@
-import { CodeIcon, ImageIcon, LayoutDashboard, MessageSquare, MusicIcon, Settings, VideoIcon } from "lucide-react";
+import { AreaChart, CodeIcon, ImageIcon, LayoutDashboard, MessageSquare, MusicIcon, Settings, VideoIcon } from "lucide-react";
 
 export const routes = [
     {
@@ -36,6 +36,12 @@ export const routes = [
         icon: CodeIcon,
         href: '/code',
         color: "text-sky-500"
+    },
+    {
+        label: "Stats",
+        icon: AreaChart,
+        href: '/stats',
+        color: 'text-sky-500'
     },
     {
         label: "Settings",
