@@ -1,3 +1,5 @@
+import { checkApiLimit, increaseApiLimit } from '@/lib/api-limit';
+import { updateImageCount } from '@/lib/api-stat-tracker';
 import { auth } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
@@ -21,6 +23,12 @@ export async function POST(req: Request) {
     }
     if (!prompt) {
       return new NextResponse('Prompt are required', { status: 400 });
+
+    }
+    const freeTrial = await checkApiLimit();
+    
+    if(!freeTrial){
+      return new NextResponse("Free trial expired", {status: 403})
     }
     if (!amount) {
       return new NextResponse('Amount is required', { status: 400 });
@@ -35,6 +43,9 @@ export async function POST(req: Request) {
       size: resolution,
 
     });
+
+    await increaseApiLimit();
+    await updateImageCount();
 
     return NextResponse.json(response.data);
   } catch (error) {

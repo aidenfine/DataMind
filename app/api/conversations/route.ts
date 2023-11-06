@@ -1,6 +1,8 @@
 import { auth } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import { increaseApiLimit, checkApiLimit } from '@/lib/api-limit';
+import { updateConversationCount } from '@/lib/api-stat-tracker';
 
 
 const openai = new OpenAI({
@@ -23,10 +25,18 @@ export async function POST(req: Request) {
       return new NextResponse('Messages are required', { status: 400 });
     }
 
+    const freeTrial = await checkApiLimit();
+    if(!freeTrial){
+      return new NextResponse("Free trial has expired", {status: 403});
+    }
+
     const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages,
     });
+
+    await increaseApiLimit();
+    await updateConversationCount();
 
     return NextResponse.json(response.choices[0].message);
   } catch (error) {
@@ -34,18 +44,3 @@ export async function POST(req: Request) {
     return new NextResponse('Internal error', { status: 500 });
   }
 }
-
-// and then in the Page
-
-
-// import OpenAI from 'openai';
-
-//  const [messages, setMessages] = useState<
-//     OpenAI.Chat.Completions.CreateChatCompletionRequestMessage[]
-//   >([]);
-
-//    const userMessage: OpenAI.Chat.Completions.CreateChatCompletionRequestMessage =
-//         {
-//           role: 'user',
-//           content: values.prompt,
-//         };

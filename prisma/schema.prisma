@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model UserApiLimit {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  count     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserApiStats {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  totalCount        Int      @default(0)
+  conversationCount Int      @default(0)
+  videoCount        Int      @default(0)
+  imageCount        Int      @default(0)
+  codeCount         Int      @default(0)
+  musicCount        Int      @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
