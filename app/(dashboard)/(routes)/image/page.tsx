@@ -148,7 +148,7 @@ const ImagePage = () => {
                                 </FormItem>
                              )}
                              />
-                             <Button className="w-full col-span-12 lg:col-span-2">
+                             <Button variant="main" className="w-full col-span-12 lg:col-span-2">
                                 Generate
                              </Button>
                         </form>

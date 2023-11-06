@@ -4,8 +4,16 @@ import Link from 'next/link'
 import { routes } from '@/helpers/paths'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
+import { FreeCounter } from './free-counter'
 
-const Sidebar = () => {
+
+interface SidebarProps {
+    apiLimitCount: number;
+}
+
+const Sidebar = ({
+    apiLimitCount = 0,
+}: SidebarProps) => {
     const pathname = usePathname();
     return ( 
         <div className="flex flex-col h-full py-4 space-y-4 ">
@@ -34,9 +42,12 @@ const Sidebar = () => {
 
                         </Link>
                     ))}
-
                 </div>
             </div>
+            <FreeCounter
+            apiLimitCount={apiLimitCount}
+             />
+        
         </div>
 
     )
