@@ -102,7 +102,7 @@ const CodePage = () => {
                 <div className="mt-4 space-y-4">
                     {isLoading && (
                         <div className="flex items-center justify-center w-full p-8 rounded-lg bg-muted">
-                            <Loader /> 
+                            <Loader message="Writing code..."/> 
                         </div>
                     ) }
                     {messages.length === 0 && !isLoading && (

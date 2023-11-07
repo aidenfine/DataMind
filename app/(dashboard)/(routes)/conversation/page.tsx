@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
 import { useProModal } from "@/hooks/use-pro-modal";
+import toast from "react-hot-toast";
 
 const ConversationPage = () => {
 
@@ -53,6 +54,8 @@ const ConversationPage = () => {
             // add popup when error
             if(error?.response?.status === 403){
                 proModal.onOpen();
+            } else {
+                toast.error("Something went wrong")
             }
             console.log(error)
             
@@ -101,7 +104,7 @@ const ConversationPage = () => {
                 <div className="mt-4 space-y-4">
                     {isLoading && (
                         <div className="flex items-center justify-center w-full p-8 rounded-lg bg-muted">
-                            <Loader /> 
+                            <Loader message="Thinkin...."/> 
                         </div>
                     ) }
                     {messages.length === 0 && !isLoading && (

@@ -1,5 +1,11 @@
 import { ThreeDots } from 'react-loader-spinner'
-export const Loader = () => {
+
+interface LoaderProps{
+    message: string,
+}
+export const Loader = ({
+    message = "Thinking..."
+}: LoaderProps) => {
     return (
         <div className="flex flex-col items-center justify-center h-full gap-y-4">
             <div className="relative">
@@ -14,7 +20,7 @@ export const Loader = () => {
                  />
             </div>
             <p className='text-sm text-muted-foreground'>
-                Thinking...
+                {message}
 
             </p>
         </div>

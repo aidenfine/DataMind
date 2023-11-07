@@ -8,6 +8,7 @@ import { Check, Zap } from "lucide-react";
 import { Button } from "./ui/button";
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export const ProModal = () => {
     const proModal = useProModal();
@@ -20,7 +21,7 @@ export const ProModal = () => {
   
         window.location.href = response.data.url;
       } catch (error) {
-        // toast.error("Something went wrong");
+        toast.error("Something went wrong");
       } finally {
         setLoading(false);
       }
@@ -58,6 +59,7 @@ export const ProModal = () => {
                 </DialogHeader>
                 <DialogFooter>
                     <Button
+                    disabled={loading}
                     onClick={onSubscribe}
                     size="lg"
                     variant="upgrade"

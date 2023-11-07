@@ -17,6 +17,7 @@ import { Loader } from "@/components/loader";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Image from "next/image";
 import { useProModal } from "@/hooks/use-pro-modal";
+import toast from "react-hot-toast";
 
 const ImagePage = () => {
 
@@ -53,6 +54,8 @@ const ImagePage = () => {
         } catch (error: any) {
             if(error?.response?.status === 403){
                 proModal.onOpen();
+            }else {
+                toast.error("Something went wrong")
             }
             console.log(error)
             
@@ -161,7 +164,7 @@ const ImagePage = () => {
                 <div className="mt-4 space-y-4">
                     {isLoading && (
                         <div className="p20">
-                            <Loader /> 
+                            <Loader message="Generating an image..."/> 
                         </div>
                     ) }
                     {images.length === 0 && !isLoading && (

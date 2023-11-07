@@ -15,6 +15,7 @@ import { useState } from "react";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
 import { useProModal } from "@/hooks/use-pro-modal";
+import toast from "react-hot-toast";
 
 const VideoPage = () => {
 
@@ -41,6 +42,8 @@ const VideoPage = () => {
         } catch (error: any) {
             if(error?.response?.status === 403){
                 proModal.onOpen();
+            }else {
+                toast.error("Something went wrong")
             }
             console.log(error)
             
@@ -88,7 +91,7 @@ const VideoPage = () => {
                 <div className="mt-4 space-y-4">
                     {isLoading && (
                         <div className="flex items-center justify-center w-full p-8 rounded-lg bg-muted">
-                            <Loader /> 
+                            <Loader message="Creating video... (this may take the longest)"/> 
                         </div>
                     ) }
                     {!video && !isLoading && (

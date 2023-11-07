@@ -1,5 +1,7 @@
+import { useProModal } from '@/hooks/use-pro-modal';
 import { checkApiLimit, increaseApiLimit } from '@/lib/api-limit';
 import { updateVideoCount } from '@/lib/api-stat-tracker';
+import { checkSubscription } from '@/lib/subscription';
 import { auth } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
 import Replicate from 'replicate'
@@ -10,6 +12,7 @@ const replicate = new Replicate({
 })
 
 export async function POST(req: Request) {
+
   try {
     const { userId } = auth();
     const body = await req.json();
@@ -23,8 +26,9 @@ export async function POST(req: Request) {
       return new NextResponse('Prompt is required', { status: 400 });
     }
     const freeTrial = await checkApiLimit();
+    const isPro = await checkSubscription();
     
-    if(!freeTrial){
+    if(!freeTrial && !isPro){
       return new NextResponse("Free trial expired", {status: 403})
     }
 
@@ -36,7 +40,9 @@ export async function POST(req: Request) {
         }
       }
     );
-    await increaseApiLimit();
+    if(!isPro){
+      await increaseApiLimit();
+    }
     await updateVideoCount();
 
     return NextResponse.json(response);

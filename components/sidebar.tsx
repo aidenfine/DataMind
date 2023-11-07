@@ -9,12 +9,15 @@ import { FreeCounter } from './free-counter'
 
 interface SidebarProps {
     apiLimitCount: number;
+    isPro: boolean
 }
 
 const Sidebar = ({
     apiLimitCount = 0,
+    isPro = false,
 }: SidebarProps) => {
     const pathname = usePathname();
+
     return ( 
         <div className="flex flex-col h-full py-4 space-y-4 ">
             <div className="flex-1 px-3 py-2">
@@ -44,6 +47,7 @@ const Sidebar = ({
                 </div>
             </div>
             <FreeCounter
+            isPro={isPro}
             apiLimitCount={apiLimitCount}
              />
         </div>
