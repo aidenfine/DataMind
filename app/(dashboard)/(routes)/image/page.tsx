@@ -16,8 +16,11 @@ import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Image from "next/image";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 const ImagePage = () => {
+
+    const proModal = useProModal();
 
     const [images, setImages] = useState<string[]>([]);
 
@@ -48,7 +51,9 @@ const ImagePage = () => {
             form.reset();
             
         } catch (error: any) {
-            // open Pro model
+            if(error?.response?.status === 403){
+                proModal.onOpen();
+            }
             console.log(error)
             
         } finally{
