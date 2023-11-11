@@ -12,7 +12,7 @@ export const  LandingNavbar =()=>{
     return(
         <nav className="flex items-center justify-between p-4 bg-transparent">
             <Link href="/" className="flex items-center">
-                <div className="relative w-8 h-8 mr-4">
+                <div className="relative w-10 h-8 mr-4">
                     <Image 
                     fill
                     alt="logo"
