@@ -1,4 +1,4 @@
-![Logo](https://raw.githubusercontent.com/aidenfine/DataMind/add-doc-and-testenv/public/logo.png?token=GHSAT0AAAAAACA4D7P7EHVSOKDHJWREFPFAZKO3MFQ)
+![Logo](https://raw.githubusercontent.com/aidenfine/DataMind/main/public/logo.png?token=GHSAT0AAAAAACA4D7P7DAYSORYVKUI57AKCZKO4KBA)
 
 ## [DataMind.ai](https://data-mind.vercel.app/)
 
