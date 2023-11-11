@@ -1,34 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Logo](https://raw.githubusercontent.com/aidenfine/DataMind/add-doc-and-testenv/public/logo.png?token=GHSAT0AAAAAACA4D7P7EHVSOKDHJWREFPFAZKO3MFQ)
 
-## Getting Started
+## [DataMind.ai](https://data-mind.vercel.app/)
 
-First, run the development server:
+An open source all in one AI tool to boost productivity. This project uses [ChatGPT API](https://openai.com/) and [Replicate AI](https://replicate.com/). Datamind can generate conversations, code, images, videos, and music all based on user text input. The project is open source meaning you can add tools customize the AI and more. Keep reading for more information on how to customize Datamind to its full potential
+
+## Where to get my API Keys?
+
+First create an account on \
+[openAI](https://openai.com/) \
+[Replicate](https://replicate.com/) \
+[Clerk](https://clerk.com/) (Visit live site if you dont want to modify user auth) \
+[Stripe](https://stripe.com/) (May not be required.) \
+In the future I want to make this project soley depend on one API key for easier local access
+
+## How to run locally
+
+This project is built with `Next.JS` and `TailwindCSS`. \
+Add all required env variables and remove .example from the `.env.example` file name
+
+Install packages
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+  npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Run Locally
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## FAQ
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**Why is the live demo API not working?** \
+The reason for the live demo api calls failing is because the site is hosted on free tier for vercel. Many of the API calls will be timed out by vercel. If this occurs often please install locally and you will not run into these issues.
