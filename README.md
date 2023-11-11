@@ -1,6 +1,6 @@
 ## How to run locally
 
-This project is built with `Next.JS` and `TailwindCSS`. \
+This project is built with `Next.TS` and `TailwindCSS`. \
 Add all required env variables and remove .example from the `.env.example` file name
 
 Install packages
