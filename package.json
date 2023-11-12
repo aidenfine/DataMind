@@ -29,6 +29,7 @@
     "crisp-sdk-web": "^1.0.21",
     "eslint": "8.52.0",
     "eslint-config-next": "14.0.1",
+    "lottie-react": "^2.4.0",
     "lucide-react": "^0.291.0",
     "next": "14.0.1",
     "openai": "^4.14.2",

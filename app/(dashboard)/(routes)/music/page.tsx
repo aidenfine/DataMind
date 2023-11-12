@@ -17,6 +17,8 @@ import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
 import { useProModal } from "@/hooks/use-pro-modal";
 import toast from "react-hot-toast";
+import Lottie from "lottie-react";
+import emptyAni from '../../../../public/empty.json'
 
 const MusicPage = () => {
 
@@ -44,7 +46,7 @@ const MusicPage = () => {
             if(error?.response?.status === 403){
                 proModal.onOpen();
             }else {
-                toast.error("Something went wrong")
+                toast.error("Vercel timed out this request")
             }
             console.log(error)
             
@@ -57,7 +59,7 @@ const MusicPage = () => {
         <div>
             <Heading
                 title="Music"
-                description="Description"
+                description="Generate some tunes"
                 icon={MessageSquare}
                 iconColor="text-violet-500"
                 bgColor="bg-violet-500/10"
@@ -92,16 +94,17 @@ const MusicPage = () => {
                 <div className="mt-4 space-y-4">
                     {isLoading && (
                         <div className="flex items-center justify-center w-full p-8 rounded-lg bg-muted">
-                            <Loader message="Creating a tune..."/> 
+                            <Loader message="Creating a tune... (This app is on free tier and API request may get blocked by vercel :(  )"/> 
                         </div>
                     ) }
                     {!music && !isLoading && (
                         <div>
-                            <Empty label="Seems quite in here... generate some music"/>
+                            <div className="p-4 mx-auto text-center w-96 h-96">
+                                <Lottie animationData={emptyAni} loop={true} />
                         </div>
-                    )}
-                    {!music && !isLoading && (
-                        <Empty label="No music generated" />
+                        <Empty label="Seems quite in here... Generate some music!!"/>
+
+                    </div>
                     )}
                     {music && (
                         <audio controls className="w-full mt-8">
