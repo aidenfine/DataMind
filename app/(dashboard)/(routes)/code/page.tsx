@@ -20,6 +20,8 @@ import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
 import ReactMarkdown from 'react-markdown';
 import { useProModal } from "@/hooks/use-pro-modal";
+import Lottie from "lottie-react";
+import empty from '../../../../public/empty.json'
 
 const CodePage = () => {
 
@@ -58,16 +60,13 @@ const CodePage = () => {
             
         } finally{
             router.refresh();
-
         }
     }
-
-
     return (
         <div>
             <Heading
                 title="Code"
-                description="Description"
+                description="Generate code with an ease"
                 icon={Code}
                 iconColor="text-green-700"
                 bgColor="bg-green-700/10"
@@ -102,12 +101,16 @@ const CodePage = () => {
                 <div className="mt-4 space-y-4">
                     {isLoading && (
                         <div className="flex items-center justify-center w-full p-8 rounded-lg bg-muted">
-                            <Loader message="Writing code..."/> 
+                            <Loader message="Writing code... (This app is on free tier and API request may get blocked by vercel :(  )"/> 
                         </div>
                     ) }
                     {messages.length === 0 && !isLoading && (
                         <div>
+                            <div className="p-4 mx-auto text-center w-96 h-96">
+                            <Lottie animationData={empty} loop={true} />
+                            </div>
                             <Empty label="Nothing here, try to send a message!"/>
+
                         </div>
                     )}
                     <div className="flex flex-col-reverse gap-y-4">

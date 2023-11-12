@@ -18,6 +18,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import Image from "next/image";
 import { useProModal } from "@/hooks/use-pro-modal";
 import toast from "react-hot-toast";
+import Lottie from "lottie-react";
+import emptyAni from '../../../../public/empty.json'
 
 const ImagePage = () => {
 
@@ -55,7 +57,7 @@ const ImagePage = () => {
             if(error?.response?.status === 403){
                 proModal.onOpen();
             }else {
-                toast.error("Something went wrong")
+                toast.error("Vercel timed out this request")
             }
             console.log(error)
             
@@ -68,7 +70,7 @@ const ImagePage = () => {
         <div>
             <Heading
                 title="Image"
-                description="Description"
+                description="Generate photo realistic images"
                 icon={MessageSquare}
                 iconColor="text-violet-500"
                 bgColor="bg-violet-500/10"
@@ -164,13 +166,17 @@ const ImagePage = () => {
                 <div className="mt-4 space-y-4">
                     {isLoading && (
                         <div className="p20">
-                            <Loader message="Generating an image..."/> 
+                            <Loader message="Generating an image... (This app is on free tier and API request may get blocked by vercel :(  )"/> 
                         </div>
                     ) }
                     {images.length === 0 && !isLoading && (
                         <div>
-                            <Empty label="Nothing here, try to generate an image!"/>
-                        </div>
+                            <div className="p-4 mx-auto text-center w-96 h-96">
+                                <Lottie animationData={emptyAni} loop={true} />
+                            </div>
+                        <Empty label="The gallery is looking empty today"/>
+
+                    </div>
                     )}
                     <div className="grid grid-cols-1 gap-4 mt-8 md:gird-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         {images.map((src) => (
