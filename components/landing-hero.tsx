@@ -1,11 +1,11 @@
-"use client"
+'use client'
 import { useAuth } from "@clerk/nextjs"
 import Link from "next/link";
 import TypewriterComponent from 'typewriter-effect'
 import { Button } from "./ui/button";
+import { TotalUserGenerations } from "./total-user-generations";
 
 export const LandingHero = () => {
-
     const { isSignedIn } = useAuth();
     return (
         <div className="space-y-5 font-bold text-center text-black py-36">
@@ -42,6 +42,7 @@ export const LandingHero = () => {
             <div className="text-xs font-normal text-zinc-400 md:text-sm">
                 No credit card required.
             </div>
+
         </div>
     )
 }
